@@ -11,13 +11,13 @@ const Contact = () => {
         </div>
         <div className='grid grid-rows-2 sm:grid-cols-2 sm:grid-rows-1 gap-2'>
             <div className=''>
-                <p className='mt-10'>17/45 ซอยชินเขต 2/46 ถนนงามวงศ์วาน</p>
-                <p className='mt-4'>บริษัท ตะกร้าเขียว จำกัด</p>
+                <p className='mt-10'>บริษัท ตะกร้าเขียว จำกัด</p>
+                <p className='mt-4'>บ้านเลขที่ 17/45 ซอยชินเขต 2/46 ถนนงามวงศ์วาน</p>
                 <p className='mt-4'>แขวงทุ่งสองห้อง เขตหลักสี่ </p>
                 <p className='mt-4'>กรุงเทพมหานคร</p>
                 <p className='mt-4'>รหัสไปรษณีย์ 10210</p>
                 <p className='mt-4'>เบอร์โทรศัพท์ : 080-292-6471</p>
-                <p className='mt-4'>E-mail ant12@windowslive.com</p>
+                <p className='mt-4'>E-mail : ant12@windowslive.com</p>
             </div>
             <iframe
                 className='mt-10 '

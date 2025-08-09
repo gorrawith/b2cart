@@ -1,6 +1,8 @@
 import { assets, footerLinks } from "../assets/assets";
+import { useAppContext } from '../context/AppContext'
 
 const Footer = () => {
+    const {navigate} = useAppContext()
     return (
         <div className="px-6 md:px-16 lg:px-24 xl:px-32 mt-24 bg-primary/10">
             <div className="flex flex-col md:flex-row items-start justify-between gap-10 py-10 
@@ -16,26 +18,110 @@ const Footer = () => {
                     </p>
                 </div>
                 <div className="flex flex-wrap justify-between w-full md:w-[45%] gap-5">
-                    {footerLinks.map((section, index) => (
-                        <div key={index}>
+                        <div>
                             <h3 className="font-semibold text-base text-gray-900 md:mb-5 mb-2">
-                                {section.title}
+                                Quick Links
                             </h3>
-                            
-
-                            <ul className="text-sm space-y-1">
-                                {section.links.map((link, i) => (
-                                    
-                                    <li key={i}>
+                            <ul className="text-sm space-y-1">   
+                                    <li>
                                         <a 
-                                            href={link.url} 
-                                            className="hover:underline transition">{link.text}
+                                            href="#"                                            
+                                            className="hover:underline transition cursor-pointer">
+                                            Home
                                         </a>
                                     </li>
-                                ))}
+                                    <li>
+                                        <a
+                                            href="#"                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Best Sellers
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Offers & Deals
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a 
+                                            onClick={()=> navigate("/contact")}                                            
+                                            className="hover:underline transition cursor-pointer">
+                                            Contact us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            FAQs
+                                        </a>
+                                    </li>
+                                
                             </ul>
                         </div>
-                    ))}
+                        <div>
+                            <h3 className="font-semibold text-base text-gray-900 md:mb-5 mb-2">
+                                Need Help?
+                            </h3>
+                            <ul className="text-sm space-y-1">   
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Delivery Information
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Return & Refund Policy
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Payment Methods
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Track your Order
+                                        </a>
+                                    </li>
+                                    
+                                
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-base text-gray-900 md:mb-5 mb-2">
+                                Follow Us
+                            </h3>
+                            <ul className="text-sm space-y-1">   
+                                    <li>
+                                        <a 
+                                            onClick={()=>window.open("https://www.instagram.com/")}                                            
+                                            className="hover:underline transition cursor-pointer">
+                                            Instagram
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={()=>window.open("https://www.facebook.com/")}                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Facebook
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            onClick={()=>window.open("https://www.tiktok.com/explore")}                                             
+                                            className="hover:underline transition cursor-pointer">
+                                            Tiktok
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    
                 </div>
             </div>
             <p className="py-4 text-center text-sm md:text-base text-gray-500/80">
