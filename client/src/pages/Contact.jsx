@@ -16,7 +16,7 @@ const Contact = () => {
                 <p className='mt-4'>แขวงทุ่งสองห้อง เขตหลักสี่ </p>
                 <p className='mt-4'>กรุงเทพมหานคร</p>
                 <p className='mt-4'>รหัสไปรษณีย์ 10210</p>
-                <p className='mt-4'>เบอร์โทรศัพท์ 080-292-6471</p>
+                <p className='mt-4'>เบอร์โทรศัพท์ : 080-292-6471</p>
                 <p className='mt-4'>E-mail ant12@windowslive.com</p>
             </div>
             <iframe
