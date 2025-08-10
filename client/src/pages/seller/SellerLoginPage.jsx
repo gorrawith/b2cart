@@ -66,6 +66,11 @@ const SellerLoginPage = () => {
             <button className='bg-primary text-white w-full py-2 rounded-md cursor-pointer'>
                 Login
             </button>
+            <button 
+                onClick={()=> navigate("/")}
+                className='bg-red-400 text-white w-full py-2 rounded-md cursor-pointer'>
+                Home
+            </button>
             </div>        
         </form>
     )

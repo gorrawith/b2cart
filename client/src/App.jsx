@@ -7,20 +7,23 @@ import { useLocation } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import Footer from "./components/Footer";
 import { useAppContext } from "./context/AppContext";
-import Login from "./components/Login";
 import AllProducts from "./pages/AllProducts";
 import ProductCategory from "./pages/ProductCategory";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/cart";
 import AddAddress from "./pages/AddAddress";
 import MyOrders from "./pages/MyOrders";
-import SellerLogin from "./components/seller/SellerLogin";
 import SellerLayout from "./pages/seller/SellerLayout";
 import AddProduct from "./pages/seller/Addproduct";
 import ProductList from "./pages/seller/ProductList";
 import Orders from "./pages/seller/Orders";
 import Loading from "./components/Loading";
 import Contact from "./pages/Contact";
+import LoginPage from "./pages/LoginPage";
+import SellerLoginPage from "./pages/seller/SellerLoginPage";
+import Register from "./pages/Register";
+
+
 const App =() => {
 
   const isSellerPath =  useLocation().pathname.includes("seller");
@@ -45,7 +48,9 @@ const App =() => {
           <Route path='/my-orders' element={<MyOrders/>}/>
           <Route path='/loader' element={<Loading/>}/>
           <Route path='/contact' element={<Contact/>}/>
-          <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLogin/>}>
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLoginPage/>}>
             <Route index element={isSeller ? <AddProduct/> : null }/>
             <Route path='product-list' element={<ProductList/>}/>
             <Route path="orders" element={<Orders/>}/>

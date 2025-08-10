@@ -72,6 +72,7 @@ import barley_image from "./barley_image.png";
 import bottom_banner_image01 from "./bottom_banner_image01.png"
 import bottom_banner_image_sm01 from "./bottom_banner_image_sm01.png"
 import login_page from "./login_page.jpg"
+import register_page from "./Register_icon.jpg"
 
 export const assets = {
   logo,
@@ -103,7 +104,8 @@ export const assets = {
   box_icon,
   bottom_banner_image01,
   bottom_banner_image_sm01,
-  login_page
+  login_page,
+  register_page
 
 };
 

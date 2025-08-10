@@ -40,19 +40,6 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-8">
-                {!user && (
-                    <NavLink 
-                        to='/seller'
-                        className="border border-gray-300 px-3 py-1 rounded-full text-xs cursor-pointer opacity-80">
-                        Seller Dashboard
-                    </NavLink>
-                )}
-                {/* <NavLink 
-                    to='/seller'
-                    className="border border-gray-300 px-3 py-1 rounded-full text-xs cursor-pointer opacity-80">
-                        Seller Dashboard
-                </NavLink> */}
-                {/* <NavLink to='/seller'>Contect</NavLink> */}
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/products'>All Product</NavLink>
                 
@@ -79,26 +66,38 @@ const Navbar = () => {
                     </button>
                 </div>
                 {!user ?(
-                    <button onClick={()=> setShowUserLogin(true)} 
+                    <button  
+                        onClick={()=> navigate("/login")}
                         className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
                         Login
                     </button>
                 ):(
-                    <div className="relative group">
-                        <img src={assets.profile_icon} className="w-10" alt=""/>
-                        <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border 
-                            border-gray-200 py-2.5 w-30 rounded-md text-sm z-40">
-                            <li onClick={()=> navigate("my-orders")} 
-                                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                My orders
-                            </li>
-                            <li
-                                onClick={logout} 
-                                className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                Logout
-                            </li>
-                        </ul>
+                    
+                    <div className="relative ">
+                        <img src={assets.profile_icon} className="cursor-pointer w-10" alt="" onClick={() => setOpen(!open)}/>
+                        {open && (
+                            <ul className=" absolute top-10 right-0 bg-white shadow border 
+                                border-gray-200 py-2.5 w-30 rounded-md text-sm z-40 ">
+                                <li 
+                                    onClick={()=>{ 
+                                        navigate("my-orders");
+                                        setOpen(false);
+                                    }}
+                                    className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
+                                    My orders
+                                </li>
+                                <li
+                                    onClick={() => {
+                                        logout();
+                                        setOpen(false);
+                                    }}
+                                    className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
+                                    Logout
+                                </li>
+                            </ul>
+                        )}
                     </div>
+                    
                 )}
             </div>
             <div className="flex items-center gap-6 sm:hidden">
@@ -135,18 +134,18 @@ const Navbar = () => {
                         {user &&
                             <NavLink to="/my-orders" onClick={()=> setOpen(false)}>My orders</NavLink>
                         }
-                        {/* <NavLink to="/" onClick={()=> setOpen(false)}>Contect</NavLink> */}
                         {!user ? (
                             <button onClick={()=>{
-                                setOpen(false)
-                                setShowUserLogin(true);
+                                navigate("/login")
+                                //setOpen(false)
+                                //setShowUserLogin(true);
                             }}className="cursor-pointer px-6 py-2 mt-2 bg-primary
                                     hover:bg-primary-dull transition text-white rounded-full text-sm">
                                     Login
                             </button>
                         ):(
                             <button onClick={logout}
-                                    className="cursor-pointer px-6 py-2 mt-2 bg-primaryhover:bg-primary-dull transition text-white rounded-full text-sm">
+                                    className="">
                                     Logout
                             </button>
                         )}

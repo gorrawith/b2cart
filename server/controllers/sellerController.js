@@ -53,3 +53,21 @@ export const sellerLogout = async (req,res) =>{
         res.json({success:false, message: error.message});
     }
 }
+
+// export const sellerCheckAuth = async (req, res) => {
+//   try {
+//     const { sellerToken } = req.cookies;
+//     if (!sellerToken) {
+//       return res.json({ success: false, message: "Not Authorized" });
+//     }
+
+//     const tokenDecode = jwt.verify(sellerToken, process.env.JWT_SECRET);
+//     if (tokenDecode.email === process.env.SELLER_EMAIL) {
+//       return res.json({ success: true, seller: tokenDecode });
+//     } else {
+//       return res.json({ success: false, message: "Not Authorized" });
+//     }
+//   } catch (error) {
+//     return res.json({ success: false, message: error.message });
+//   }
+// };

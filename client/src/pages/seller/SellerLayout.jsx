@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const SellerLayout = () => {
 
-    const {axios,navigate} = useAppContext();
+    const {axios,navigate,setIsSeller,setUser} = useAppContext();
     
 
     const sidebarLinks = [
@@ -17,7 +17,10 @@ const SellerLayout = () => {
     const logout =async ()=>{
         try{
             const {data} = await axios.get('/api/seller/logout');
+            
             if(data.success){
+                setIsSeller(false); // ล้าง state seller
+                setUser(null);
                 toast.success(data.message)
                 navigate('/')
             }else{
