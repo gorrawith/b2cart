@@ -71,6 +71,7 @@ import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
 import bottom_banner_image01 from "./bottom_banner_image01.png"
 import bottom_banner_image_sm01 from "./bottom_banner_image_sm01.png"
+import login_page from "./login_page.jpg"
 
 export const assets = {
   logo,
@@ -102,6 +103,7 @@ export const assets = {
   box_icon,
   bottom_banner_image01,
   bottom_banner_image_sm01,
+  login_page
 
 };
 
