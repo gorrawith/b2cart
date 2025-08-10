@@ -11,10 +11,8 @@ const Orders = () => {
     try{
       const {data} = await axios.get('/api/order/seller');
       console.log("Fetched Orders:", data);
-      //console.log(data.orders)
       if(data.success){
         setOrders(data.orders)
-        //console.log("ok")
       }else{
         toast.error(data.message)
       }
@@ -34,7 +32,7 @@ const Orders = () => {
         {orders.map((order, index) => (
           <div 
             key={index} 
-            className="flex flex-col md:grid md:grid-cols-[2fr_2fr_1fr_1fr] md:items-center gap-5 p-5 max-w-4xl rounded-md border border-gray-300 text-gray-800">
+            className="flex flex-col md:grid md:grid-cols-[2fr_2fr_1fr_1fr] md:items-center gap-5 p-5 max-w-6xl rounded-md border border-gray-300 text-gray-800">
             <div className="flex gap-5 max-w-80">
               <img 
                 className="w-12 h-12 object-cover " 
@@ -83,13 +81,13 @@ const Orders = () => {
 
             <div className="flex flex-col text-sm md:text-base text-black/60">
                 <p>
-                  Method: {order.paymentType}
+                  รูปแบบการชำระเงิน: {order.paymentType}
                 </p>
                 <p>
                   Date: {new Date(order.createdAt).toLocaleDateString()}
                 </p>
                 <p>
-                  Payment: {order.isPaid ? "Paid" : "Pending"}
+                  สถานะ : {order.isPaid ? "Paid" : "Pending"}
                 </p>
             </div>
           </div>

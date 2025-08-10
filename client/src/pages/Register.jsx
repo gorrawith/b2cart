@@ -94,7 +94,10 @@ const Register = () => {
                         <a className="text-sm underline" href="#">Forgot password?</a>
                     </div>
         
-                    <button onClick={() => setState("register")} type="submit" className="mt-8 w-full h-11 rounded-full text-white bg-primary hover:opacity-90 transition-opacity">
+                    <button 
+                        onClick={() => setState("register")} 
+                        type="submit" 
+                        className="mt-8 w-full h-11 rounded-full text-white bg-primary hover:opacity-90 transition-opacity cursor-pointer">
                         Register
                     </button>
                     <p className="text-gray-500/90 text-sm mt-4">Already have account?-
