@@ -5,9 +5,7 @@ import Product from "../models/Product.js"
 export const addProduct = async (req,res)=>{
     try{
         let productData = JSON.parse(req.body.productData)
-
         const images = req.files
-
         let imagesUrl = await Promise.all(
             images.map(async (item)=>{
                 let result = await cloudinary.uploader.upload(item.path,
@@ -41,7 +39,6 @@ export const productById = async (req,res)=>{
         const {id} = req.body
         const product = await Product.findById(id)
         res.json({success: true,product})
-
     }catch (error){
         console.log(error.message);
         res.json({success:false,message: error.message})
@@ -59,5 +56,4 @@ export const changeStock = async (req,res)=>{
         console.log(error.message);
         res.json({success:false,message: error.message})
     }
-
 }

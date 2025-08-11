@@ -4,20 +4,12 @@ import { categories,assets } from '../assets/assets'
 import ProductCard from '../components/ProductCard'
 import { useState, useEffect } from 'react'
 
-
-
 const ProductCategory = () => {
     const {products} = useAppContext()
     const {category} = useParams()
-
     const [searchQuery, setSearchQuery] = useState('')
     const [filteredProducts, setFilteredProducts] = useState([])
-
-    const searchCategory = categories.find((item)=>item.path.
-    toLowerCase()==category)
-
-    // const filteredProducts = products.filter((product)=>product.
-    // category.toLowerCase()===category)
+    const searchCategory = categories.find((item)=>item.path.toLowerCase()==category)
 
     useEffect(() => {
       const categoryProducts = products.filter(product =>
@@ -25,11 +17,9 @@ const ProductCategory = () => {
               ? product.category.map(c => c.toLowerCase()).includes(category)
               : product.category.toLowerCase() === category
       )
-
       const searchFiltered = categoryProducts.filter(product =>
           product.name.toLowerCase().includes(searchQuery.toLowerCase())
       )
-
       setFilteredProducts(searchFiltered)
     }, [products, category, searchQuery])
 
@@ -43,7 +33,6 @@ const ProductCategory = () => {
           <div className='w-16 h-0.5 bg-primary rounded-full'></div>
         </div>
       )}
-
       {/* Search input */}
       <div className="mt-5 flex justify-start mb-4">
           <div className="flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full w-[250px]">
@@ -77,5 +66,4 @@ const ProductCategory = () => {
     </div>
   )
 }
-
 export default ProductCategory

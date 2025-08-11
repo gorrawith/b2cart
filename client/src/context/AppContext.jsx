@@ -12,19 +12,16 @@ export const AppContext = createContext();
 export const AppContextProvider = ({children})=>{
 
     const currency = import.meta.env.VITE_CURRENCY;
-
     const location = useLocation()
     const navigate = useNavigate();
     const [user,setUser]=useState(null)
     const [isSeller,setIsSeller]=useState(false)
     const [showUserLogin,setShowUserLogin]= useState(false)
     const [products,setProducts]=useState([])
-
     const [cartItems,setCartItems] = useState({})
     const [searchQuery,setSearchQuery] = useState({})
 
     //Fetch Seller Status
-
     const fetchSeller = async ()=>{
         try{
             const {data} = await axios.get('/api/seller/is-auth');
@@ -51,8 +48,6 @@ export const AppContextProvider = ({children})=>{
             setUser(null)
         }
     }
-
-
 
     //Fetch All Products
     const fetchProducts = async ()=>{
@@ -129,11 +124,12 @@ export const AppContextProvider = ({children})=>{
         fetchUser()
         fetchSeller()
         fetchProducts()
-    },[])
+    },[location])
 
     // Update Database Cart Items
     useEffect(()=>{
         const updateCart = async ()=>{
+            console.log(cartItems)
             try{
                 //console.log(cartItems)
                 const {data} = await axios.post('/api/cart/update',{
@@ -141,6 +137,7 @@ export const AppContextProvider = ({children})=>{
                     userId: user._id 
                 })
                 if (!data.success){
+                    
                     toast.error(data.message)
                 }
             }catch (error) {
@@ -152,13 +149,13 @@ export const AppContextProvider = ({children})=>{
         }
     },[cartItems])
 
-
     const value = {navigate,user,setUser,setIsSeller,isSeller,
         showUserLogin,setShowUserLogin,products,currency,addToCart,
         updateCartItem,removeFromCart,cartItems,searchQuery,setSearchQuery,
-        getCartAmount,getCartCount,axios,fetchProducts,setCartItems,location
+        getCartAmount,getCartCount,axios,fetchProducts,setCartItems,location,
+        fetchUser
     }
-    
+
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>

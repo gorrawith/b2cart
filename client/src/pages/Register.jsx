@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 const Register = () => {
 
     const {setShowUserLogin,setUser,axios,navigate,setCartItems} = useAppContext()
-
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -22,11 +21,9 @@ const Register = () => {
                 navigate('/')
                 setUser(data.user)
                 setCartItems({})
-                setShowUserLogin(false)
-                
+                setShowUserLogin(false)                
             }else{
-                toast.error(data.message)
-                
+                toast.error(data.message)                
             }
         }catch (error){
             toast.error(error.message)
@@ -37,23 +34,17 @@ const Register = () => {
         <div className="flex h-[700px] w-full">
             <div className="w-full hidden md:inline-block">
                 <img  className="mt-10 h-full" src={assets.register_page} alt="leftSideImage" />
-            </div>
-        
-            <div className="w-full flex flex-col items-center justify-center">
-        
+            </div>        
+            <div className="w-full flex flex-col items-center justify-center">        
                 <form 
                     onSubmit={onSubmitHandler}
                     className="md:w-96 w-80 flex flex-col items-center justify-center">
-                    <h2 className="text-4xl text-gray-900 font-medium">Sign Up</h2>
-                    
-        
-                
+                    <h2 className="text-4xl text-gray-900 font-medium">Sign Up</h2>          
                     <div className="flex items-center gap-4 w-full my-5">
                         <div className="w-full h-px bg-gray-300/90"></div>
                         <p className="w-full text-nowrap text-sm text-gray-500/90">or sign up with email</p>
                         <div className="w-full h-px bg-gray-300/90"></div>
-                    </div>
-        
+                    </div>        
                     <div className="flex items-center w-full bg-transparent border border-gray-300/60 h-12 rounded-full overflow-hidden pl-6 gap-2">
                         <input
                             onChange={(e) => setName(e.target.value)}  
@@ -83,17 +74,14 @@ const Register = () => {
                             className="bg-transparent text-gray-500/80 placeholder-gray-500/80 outline-none text-sm w-full h-full" 
                             required 
                         />
-                    </div>
-
-        
+                    </div>      
                     <div className="w-full flex items-center justify-between mt-8 text-gray-500/80">
                         <div className="flex items-center gap-2">
                             <input className="h-5" type="checkbox" id="checkbox" />
                             <label className="text-sm" htmlFor="checkbox">Remember me</label>
                         </div>
                         <a className="text-sm underline" href="#">Forgot password?</a>
-                    </div>
-        
+                    </div>        
                     <button 
                         onClick={() => setState("register")} 
                         type="submit" 
@@ -108,5 +96,4 @@ const Register = () => {
         </div>
     );
 }
-
 export default Register

@@ -6,8 +6,7 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false);
-    const {user,setUser,setShowUserLogin,navigate,
-        searchQuery,setSearchQuery,getCartCount,axios,setCartItems} = useAppContext();
+    const {user,setUser,navigate,searchQuery,getCartCount,axios,setCartItems} = useAppContext();
     
     const logout = async ()=>{
         try{
@@ -23,7 +22,6 @@ const Navbar = () => {
         }catch (error) {
             toast.error(error.message)
         }
-
     }
     
     useEffect(()=>{
@@ -37,22 +35,10 @@ const Navbar = () => {
             <NavLink to='/' onClick={()=> setOpen(false)}>
                 <img className="h-9" src={assets.logo} alt="logo" />
             </NavLink>
-
             {/* Desktop Menu */}
             <div className="hidden sm:flex items-center gap-8">
                 <NavLink to='/'>Home</NavLink>
                 <NavLink to='/products'>All Product</NavLink>
-                
-                {/* <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                    <input
-                        onChange={(e)=>setSearchQuery(e.target.value)}
-                        className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
-                        type="text"
-                        placeholder="Search products"
-                    />
-                    <img src={assets.search_icon} alt='search' className="w-4 h-4" />
-                </div> */}
-
                 <div 
                     onClick={()=> navigate("/cart")} 
                     className="relative cursor-pointer">
@@ -71,8 +57,7 @@ const Navbar = () => {
                         className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
                         Login
                     </button>
-                ):(
-                    
+                ):(                    
                     <div className="relative ">
                         <img src={assets.profile_icon} className="cursor-pointer w-10" alt="" onClick={() => setOpen(!open)}/>
                         {open && (
@@ -96,8 +81,7 @@ const Navbar = () => {
                                 </li>
                             </ul>
                         )}
-                    </div>
-                    
+                    </div>                    
                 )}
             </div>
             <div className="flex items-center gap-6 sm:hidden">
@@ -116,16 +100,14 @@ const Navbar = () => {
                 <button
                     onClick={() => (open ? setOpen(false) : setOpen(true))}
                     aria-label="Menu"
-                    className=""
-                >
+                    className="">
                     {/* Menu Icon SVG */}
                     <img 
                         src={assets.menu_icon} 
                         alt='menu' 
                     />
                 </button>
-            </div>
-            
+            </div> 
             { open && (
                 <div className={`${open ? "flex" : "hidden"} 
                     absolute z-50 top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
@@ -154,5 +136,4 @@ const Navbar = () => {
         </div>
     );
 };
-
 export default Navbar;

@@ -97,6 +97,8 @@ const Cart = () => {
         }
     },[user])
 
+    
+
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16">
             <div className='flex-1 max-w-4xl'>
@@ -187,8 +189,8 @@ const Cart = () => {
                     <p className="text-sm font-medium uppercase">
                         Delivery Address
                     </p>
-                    <div className="relative flex justify-between items-start mt-2">
-                        <p className="text-gray-500">
+                    <div className="relative flex justify-between items-start mt-2 ">
+                        <p className="text-gray-500  ">
                             {selectedAddress ? `
                             ${selectedAddress.street},
                             ${selectedAddress.city},

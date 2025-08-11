@@ -22,7 +22,7 @@ const AddAddress = () => {
   const [address,setAddress]= useState({
     firstName: '',
     lastName:'',
-    email:'',
+    //email:'',
     street:'',
     city:'',
     state:'',
@@ -99,13 +99,13 @@ const AddAddress = () => {
                 placeholder="Last Name"
               />
             </div>
-            <InputField
+            {/* <InputField
               handleChange={handleChange}
               address={address}
               name='email'
               type="email"
               placeholder="Email address"
-            />
+            /> */}
             <InputField
               handleChange={handleChange}
               address={address}

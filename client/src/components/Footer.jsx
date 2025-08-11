@@ -55,8 +55,7 @@ const Footer = () => {
                                             className="hover:underline transition cursor-pointer">
                                             FAQs
                                         </a>
-                                    </li>
-                                
+                                    </li>                                
                             </ul>
                         </div>
                         <div>
@@ -87,9 +86,7 @@ const Footer = () => {
                                             className="hover:underline transition cursor-pointer">
                                             Track your Order
                                         </a>
-                                    </li>
-                                    
-                                
+                                    </li>                                                                    
                             </ul>
                         </div>
                         <div>
@@ -117,19 +114,15 @@ const Footer = () => {
                                             className="hover:underline transition cursor-pointer">
                                             Tiktok
                                         </a>
-                                    </li>
-                                
+                                    </li>                                
                             </ul>
-                        </div>
-                    
+                        </div>                    
                 </div>
             </div>
             <p className="py-4 text-center text-sm md:text-base text-gray-500/80">
                 Copyright {new Date().getFullYear()} ©  b2time.
             </p>
-        </div>
-        
+        </div>        
     );
 };
-
 export default Footer

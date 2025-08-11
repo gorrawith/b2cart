@@ -19,7 +19,6 @@ const SellerLoginPage = () => {
         }else{
             toast.error(data.message)
         }
-
         }catch(error){
             toast.error(error.message)
         }   
@@ -74,7 +73,5 @@ const SellerLoginPage = () => {
             </div>        
         </form>
     )
-    
 }
-
 export default SellerLoginPage

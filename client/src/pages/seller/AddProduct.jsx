@@ -11,13 +11,11 @@ const AddProduct = () => {
     const [category,setCategory]=useState('');
     const [price,setPrice] = useState('');
     const [offerPrice,setOfferPrice]=useState('');
-
     const {axios} = useAppContext()
 
     const onSubmitHandler = async (event) =>{
         try{
             event.preventDefault();
-
             const productData = {
                 name,
                 description:description.split('\n'),
@@ -30,9 +28,7 @@ const AddProduct = () => {
             for (let i =0;i<files.length; i++){
                 formData.append('images',files[i])
             }
-
             const {data} = await axios.post('/api/product/add',formData)
-
             if(data.success){
                 toast.success(data.message);
                 setName('');
@@ -44,13 +40,10 @@ const AddProduct = () => {
             }else{
                 toast.error(data.message)
             }
-
         }catch(error){
             toast.error(data.message)
         }
     }
-
-
   return (
     <div className="no-scrollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col
         justify-between">
@@ -177,5 +170,4 @@ const AddProduct = () => {
     </div>
   )
 }
-
 export default AddProduct

@@ -41,5 +41,4 @@ const BottomBanner = () => {
     </div>
   )
 }
-
 export default BottomBanner

@@ -55,7 +55,6 @@ const Orders = () => {
                 ))}
               </div>
             </div>
-
             <div className="text-sm md:text-base text-black/60">
                 <p className='text-black/80'>
                   {order.address.firstName} 
@@ -74,11 +73,9 @@ const Orders = () => {
                   {order.address.phone}
                 </p>
             </div>
-
             <p className="font-medium text-lg my-auto">
               {currency}{order.amount}
             </p>
-
             <div className="flex flex-col text-sm md:text-base text-black/60">
                 <p>
                   รูปแบบการชำระเงิน: {order.paymentType}

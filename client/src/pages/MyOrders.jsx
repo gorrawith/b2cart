@@ -64,7 +64,7 @@ return (
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col justify-center md:ml-8 mb-4 md:mb-0 text-primary text-lg font-medium">
+              <div className="flex flex-col justify-center md:ml-3 mb-4 md:mb-0 text-primary text-lg font-medium">
                 <p>
                   Quantity: {item.quantity|| "1"}
                 </p>

@@ -9,10 +9,7 @@ const ProductDetails = () => {
     const {id} = useParams()
     const [relatedProducts,setRelatedProducts] = useState([]);
     const [thumbnail, setThumbnail] =useState(null);
-    
     const product = products.find((item) => item._id === id);
-    
-    console.log(products, id, product)
 
     useEffect(()=>{
         if(products.length>0){
@@ -37,7 +34,6 @@ const ProductDetails = () => {
                 </Link> /
                 <span className="text-primary-500"> {product.name}</span>
             </p>
-
             <div className="flex flex-col md:flex-row gap-16 mt-4">
                 <div className="flex gap-3">
                     <div className="flex flex-col gap-3">
@@ -53,15 +49,12 @@ const ProductDetails = () => {
                             </div>
                         ))}
                     </div>
-
                     <div className="border border-gray-500/30 max-w-100 rounded overflow-hidden">
                         <img src={thumbnail} alt="Selected product" className="w-full h-full object-cover" />
                     </div>
                 </div>
-
                 <div className="text-sm w-full md:w-1/2">
                     <h1 className="text-3xl font-medium">{product.name}</h1>
-
                     <div className="flex items-center gap-0.5 mt-1">
                         {Array(5).fill('').map((_, i) => (
                             <img 
@@ -72,7 +65,6 @@ const ProductDetails = () => {
                         ))}
                         <p className="text-base ml-2">(4)</p>
                     </div>
-
                     <div className="mt-6">
                         <p className="text-gray-500/70 line-through">
                             MRP: 
@@ -86,14 +78,12 @@ const ProductDetails = () => {
                             (inclusive of all taxes)
                         </span>
                     </div>
-
                     <p className="text-base font-medium mt-6">About Product</p>
                     <ul className="list-disc ml-4 text-gray-500/70">
                         {product.description.map((desc, index) => (
                             <li key={index}>{desc}</li>
                         ))}
                     </ul>
-
                     <div className="flex items-center mt-10 gap-4 text-base">
                         <button 
                             onClick={()=> addToCart(product._id)}
@@ -137,5 +127,4 @@ const ProductDetails = () => {
         </div>
     );
 };
-
 export default ProductDetails

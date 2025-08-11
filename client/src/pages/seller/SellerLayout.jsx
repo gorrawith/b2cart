@@ -7,7 +7,6 @@ const SellerLayout = () => {
 
     const {axios,navigate,setIsSeller,setUser} = useAppContext();
     
-
     const sidebarLinks = [
         { name: "Add Product", path: "/seller", icon: assets.add_icon },
         { name: "Product List", path: "/seller/product-list", icon: assets.product_list_icon },
@@ -30,7 +29,6 @@ const SellerLayout = () => {
             toast.error(error.message)
         }
     }
-
     return (
         <>
             <div className="flex items-center justify-between px-4 md:px-8 border-b border-gray-300 py-3 bg-white ">
@@ -76,10 +74,8 @@ const SellerLayout = () => {
                 ))}
                 </div>
                 <Outlet/>
-            </div>
-            
+            </div>            
         </>
     );
 };
-
 export default SellerLayout

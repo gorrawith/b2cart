@@ -1,4 +1,3 @@
-import React from 'react'
 import ProductCard from './ProductCard'
 import { useAppContext } from '../context/AppContext'
 
@@ -19,5 +18,4 @@ const BestSeller = () => {
     </div>
   )
 }
-
 export default BestSeller

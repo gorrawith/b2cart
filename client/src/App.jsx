@@ -23,7 +23,6 @@ import LoginPage from "./pages/LoginPage";
 import SellerLoginPage from "./pages/seller/SellerLoginPage";
 import Register from "./pages/Register";
 
-
 const App =() => {
 
   const isSellerPath =  useLocation().pathname.includes("seller");
@@ -54,7 +53,6 @@ const App =() => {
             <Route index element={isSeller ? <AddProduct/> : null }/>
             <Route path='product-list' element={<ProductList/>}/>
             <Route path="orders" element={<Orders/>}/>
-
           </Route>
         </Routes>
       </div>

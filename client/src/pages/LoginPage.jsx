@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 const LoginPage = () => {
 
-    const {setShowUserLogin,setUser,axios,navigate,setCartItems,cartItems,user} = useAppContext()
+    const {setShowUserLogin,setUser,axios,navigate,setCartItems,cartItems,user,fetchUser} = useAppContext()
     
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
@@ -20,6 +20,7 @@ const LoginPage = () => {
                 name,email,password
             });
             if (data.success){
+                //await fetchUser();
                 navigate('/')
                 setUser(data.user)
                 setCartItems({})

@@ -11,16 +11,13 @@ export const placeOrderCOD = async (req,res)=>{
         if(!address || items.length === 0){
             return res.json({success:false , message: "Invalid data"})
         }
-
         //Calculate Amount Using Items
         let amount = await items.reduce(async (acc,item)=>{
             const product = await Product.findById(item.product);
             return (await acc) + product.offerPrice * item.quantity;
         },0)
-
         // Add Tax Charge (2%)
         amount += Math.floor(amount*0.02)
-
         await Order.create({
             userId,
             items,
@@ -28,12 +25,9 @@ export const placeOrderCOD = async (req,res)=>{
             address,
             paymentType: "COD",
         });
-
         return res.json({success:true, message:"Order Placed Successfully"})
-
     }catch(error){
         return res.json({success: false,message: error.message})
-
     }
 }
 
@@ -47,7 +41,6 @@ export const placeOrderStripe = async (req,res)=>{
             return res.json({success:false , message: "Invalid data"})
         }
         let productData = [];
-
         //Calculate Amount Using Items
         let amount = await items.reduce(async (acc,item)=>{
             const product = await Product.findById(item.product);
@@ -58,10 +51,8 @@ export const placeOrderStripe = async (req,res)=>{
             });
             return (await acc) + product.offerPrice * item.quantity;
         },0)
-
         // Add Tax Charge (2%)
         amount += Math.floor(amount*0.02)
-
         const order = await Order.create({
             userId,
             items,
@@ -69,10 +60,8 @@ export const placeOrderStripe = async (req,res)=>{
             address,
             paymentType: "Online",
         });
-
         //Stripe Gateway Initialize
         const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
-
         // create line items for stripe
         const line_items = productData.map((item)=>{
             return {
@@ -98,10 +87,8 @@ export const placeOrderStripe = async (req,res)=>{
             }
         })
         return res.json({success:true, url:session.url});
-
     }catch(error){
         return res.json({success: false,message: error.message})
-
     }
 }
 
@@ -109,17 +96,14 @@ export const placeOrderStripe = async (req,res)=>{
 export const stripeWebhooks = async (request,response)=>{
     // Stripe Gateway Initialize
     const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
-
     const sig = request.headers["stripe-signature"];
     let event;
-
     try{
         event = stripeInstance.webhooks.constructEvent(
             request.body,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
         );
-
     }catch (error) {
         response.status(400).send(`Webhook Error: ${error.message}`)
     }
@@ -128,12 +112,10 @@ export const stripeWebhooks = async (request,response)=>{
         case "payment_intent.succeeded" :{
             const paymentIntent = event.data.object;
             const paymentIntentId = paymentIntent.id;
-
             //Getting Session Metadata
             const session = await stripeInstance.checkout.sessions.list({
                 payment_intent: paymentIntentId,
             })
-
             const {orderId,userId} = session.data[0].metadata;
             // Mark Payment as Paid
             await Order.findByIdAndUpdate(orderId,{isPaid:true})
@@ -144,12 +126,10 @@ export const stripeWebhooks = async (request,response)=>{
         case "payment_intent.payment_failed": {
             const paymentIntent = event.data.object;
             const paymentIntentId = paymentIntent.id;
-
             //Getting Session Metadata
             const session = await stripeInstance.checkout.sessions.list({
                 payment_intent: paymentIntentId,
             })
-
             const {orderId} = session.data[0].metadata;
             await Order.findByIdAndDelete(orderId);
             break;
@@ -160,7 +140,6 @@ export const stripeWebhooks = async (request,response)=>{
     }
     response.json({received:true})
 }
-
 
 // Get Orders by User ID : /api/order/user
 export const getUserOrders = async (req,res)=>{
@@ -180,7 +159,6 @@ export const getUserOrders = async (req,res)=>{
 export const getAllOrders = async (req,res)=>{
     try{   
         const orders = await Order.find({
-            //userId,
             $or: [{paymentType: "COD"},{isPaid: true}]
         })
         .populate("items.product address")
