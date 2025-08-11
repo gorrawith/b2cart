@@ -272,4 +272,4 @@ const Cart = () => {
         </div>
     ) : null
 }
-export default Cart
+export default Cart;
