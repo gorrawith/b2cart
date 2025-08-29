@@ -1,2 +1,4 @@
 # Full-Stack Developer E-Commerce Website
-- The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.
+- Online store website with login, membership registration and online payment system. Users can view and order products. There is an admin system for managing and viewing customer order information and checking product stock.
+- Front-End Uses React,Tailwind CSS
+- Backend Uses NodeJs,Express,MongoDB Uploaded image data management system uses Cloudinary Online Payment system uses Stripe
