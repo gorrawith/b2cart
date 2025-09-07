@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const SellerLoginPage = () => {
 
-    const {isSeller,setIsSeller,navigate} = useAppContext()
+    const {isSeller,setIsSeller,navigate,user} = useAppContext()
     const [email,setEmail]=useState("");
     const [password,setPassword] = useState("");
 
@@ -27,6 +27,7 @@ const SellerLoginPage = () => {
         if(isSeller){
         navigate("/seller")
         }
+        
     },[isSeller])
 
     return (

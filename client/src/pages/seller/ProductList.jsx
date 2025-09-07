@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useAppContext } from '../../context/AppContext'
 import toast from 'react-hot-toast'
 

@@ -73,6 +73,9 @@ import bottom_banner_image01 from "./bottom_banner_image01.png"
 import bottom_banner_image_sm01 from "./bottom_banner_image_sm01.png"
 import login_page from "./login_page.jpg"
 import register_page from "./Register_icon.jpg"
+import person from "./person_icon.svg"
+import person00 from "./product_list_icon.svg"
+import register_icon00 from "./Register_icon00.png"
 
 export const assets = {
   logo,
@@ -105,7 +108,10 @@ export const assets = {
   bottom_banner_image01,
   bottom_banner_image_sm01,
   login_page,
-  register_page
+  register_page,
+  person,
+  person00,
+  register_icon00
 
 };
 

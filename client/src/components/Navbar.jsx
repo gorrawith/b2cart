@@ -23,6 +23,22 @@ const Navbar = () => {
             toast.error(error.message)
         }
     }
+
+    const sendVerificationOtp = async ()=>{
+    try{
+      axios.defaults.withCredentials = true
+
+      const {data} = await axios.post('/api/user/send-verify-otp')
+      if(data.success){
+        navigate('/email-verify')
+        toast.success(data.message)
+      }else{
+        toast.error(data.message)
+      }
+    }catch(error){
+      toast.error(error.message)
+    }
+    }
     
     useEffect(()=>{
         if(searchQuery.length >0){
@@ -62,7 +78,21 @@ const Navbar = () => {
                         <img src={assets.profile_icon} className="cursor-pointer w-10" alt="" onClick={() => setOpen(!open)}/>
                         {open && (
                             <ul className=" absolute top-10 right-0 bg-white shadow border 
-                                border-gray-200 py-2.5 w-30 rounded-md text-sm z-40 ">
+                                border-gray-200 py-2.5 w-35 rounded-md text-sm z-40 ">
+                                {!user.isAccountVerified &&
+                                    <li 
+                                        onClick={sendVerificationOtp}
+                                        className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>
+                                        Verify email
+                                    </li>
+                                }
+                                <li 
+                                    onClick={()=>{navigate('/reset-password')
+                                        setOpen(false);
+                                    }}
+                                    className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
+                                    Change Password
+                                </li>
                                 <li 
                                     onClick={()=>{ 
                                         navigate("my-orders");
@@ -119,8 +149,6 @@ const Navbar = () => {
                         {!user ? (
                             <button onClick={()=>{
                                 navigate("/login")
-                                //setOpen(false)
-                                //setShowUserLogin(true);
                             }}className="cursor-pointer px-6 py-2 mt-2 bg-primary
                                     hover:bg-primary-dull transition text-white rounded-full text-sm">
                                     Login

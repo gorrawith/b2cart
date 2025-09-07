@@ -22,7 +22,6 @@ const AddAddress = () => {
   const [address,setAddress]= useState({
     firstName: '',
     lastName:'',
-    //email:'',
     street:'',
     city:'',
     state:'',
@@ -38,10 +37,8 @@ const AddAddress = () => {
       ...prevAddress,
       [name]: value,
     }))
-    console.log(address)
   }
   
-
   const onSubmitHandler = async (e)=>{
     e.preventDefault();
     console.log("user:", user); 
@@ -68,7 +65,6 @@ const AddAddress = () => {
       navigate('/cart')
     }
   },[])
-
 
   return (
     <div className='mt-16 pb-16'>
@@ -99,13 +95,6 @@ const AddAddress = () => {
                 placeholder="Last Name"
               />
             </div>
-            {/* <InputField
-              handleChange={handleChange}
-              address={address}
-              name='email'
-              type="email"
-              placeholder="Email address"
-            /> */}
             <InputField
               handleChange={handleChange}
               address={address}

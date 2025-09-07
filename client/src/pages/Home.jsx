@@ -5,7 +5,7 @@ import BottomBanner from "../components/BottomBanner";
 
 const Home = ()=>{
     return (
-        <div className="mt-10">
+        <div id="Home" className="mt-10">
             <MainBanner/>
             <Categories/>
             <BestSeller/>

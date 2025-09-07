@@ -97,8 +97,6 @@ const Cart = () => {
         }
     },[user])
 
-    
-
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16">
             <div className='flex-1 max-w-4xl'>
@@ -198,11 +196,6 @@ const Cart = () => {
                             ${selectedAddress.country}` 
                             :"No address found"}
                         </p>
-                        {/* <button 
-                            onClick={() => setShowAddress(!showAddress)} 
-                            className="text-primary hover:underline cursor-pointer">
-                            Change
-                        </button> */}
                         <button 
                             onClick={() => {
                                 if (!user) {

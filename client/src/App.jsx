@@ -22,21 +22,24 @@ import Contact from "./pages/Contact";
 import LoginPage from "./pages/LoginPage";
 import SellerLoginPage from "./pages/seller/SellerLoginPage";
 import Register from "./pages/Register";
+import EmailVerify from "./pages/EmailVerify";
+import ResetPassword from "./pages/ResetPassword";
+import { Navigate } from "react-router-dom";
+
 
 const App =() => {
 
   const isSellerPath =  useLocation().pathname.includes("seller");
-  const {showUserLogin,isSeller}=useAppContext()
+  const {showUserLogin,isSeller,user}=useAppContext()
 
   return (
     <div className="text-default min-h-screen text-gray-700 bg-white">
-      {isSellerPath ? null : <Navbar/>}
-      {showUserLogin ? <Login/> : null}
+      {isSellerPath ? null : <Navbar/>} 
+      {showUserLogin ? <LoginPage/> : null}
 
       <Toaster/>
 
-      <div className={`${isSellerPath ? "" : 
-          "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
+      <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/products' element={<AllProducts/>}/>
@@ -49,11 +52,17 @@ const App =() => {
           <Route path='/contact' element={<Contact/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/seller' element={isSeller ? <SellerLayout/> : <SellerLoginPage/>}>
+          <Route path='/email-verify' element={<EmailVerify/>}/>
+          <Route path='/reset-password' element={<ResetPassword/>}/>
+          <Route 
+            path='/seller' 
+            element={(isSeller && !user) ? <SellerLayout/> : 
+                    user ? <Navigate to="/" replace />: <SellerLoginPage/>}>
             <Route index element={isSeller ? <AddProduct/> : null }/>
             <Route path='product-list' element={<ProductList/>}/>
             <Route path="orders" element={<Orders/>}/>
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
       {!isSellerPath && <Footer/>}
