@@ -134,7 +134,7 @@ export const logout = async (req,res) =>{
     }
 }
 
-// Send Verifiaction to the User's Email
+// Send Verifiaction to the User's Email : /api/user/send-verify-otp
 export const sendVerifyOtp = async (req,res) =>{
     try{
         const userId = req.userId;
@@ -171,7 +171,7 @@ export const sendVerifyOtp = async (req,res) =>{
     }
 }
 
-// Verify the Email using the OTP
+// Verify the Email using the OTP : /api/user/verify-account
 export const verifyEmail = async (req,res) =>{
     
     const otp = req.body.otp;
@@ -221,7 +221,7 @@ export const verifyEmail = async (req,res) =>{
     }
 }
 
-// Send Password Reset OTP
+// Send Password Reset OTP : /api/user/send-reset-otp
 export const sendResetOtp = async (req,res)=>{
     const {email} = req.body;
 
@@ -242,7 +242,7 @@ export const sendResetOtp = async (req,res)=>{
         const otp = String(Math.floor(100000+Math.random()*900000));
 
         user.resetOtp = otp;
-        user.resetOtpExpireat = Date.now() + 15*60*1000
+        user.resetOtpExpireAt = Date.now() + 15*60*1000
 
         await user.save();
 
@@ -268,8 +268,36 @@ export const sendResetOtp = async (req,res)=>{
         })
     }
 }
+// CheckOtp : /api/user/verify-reset-otp
+export const verifyResetOtp = async (req,res)=>{
+    const { email, otp } = req.body;
+    try {
+        const user = await User.findOne({email});
+        if(!user) return res.json({
+            success:false,
+            message:'User not found'
+        });
+        if(user.resetOtp !== otp) return res.json({
+            success:false,
+            message:'OTP ไม่ถูกต้อง'
+        });
+        if(user.resetOtpExpireAt < Date.now()) return res.json({
+            success:false,
+            message:'OTP หมดอายุ'
+        });
+        return res.json({
+            success:true,
+            message:'OTP ถูกต้อง'
+        });
+    } catch(err){
+        return res.json({
+            success:false,
+            message:err.message
+        });
+    }
+}
 
-// Reset User Password
+// Reset User Password /api/user/reset-password
 export const resetPassword = async (req,res)=>{
     const {email,otp,newPassword} = req.body;
 
@@ -293,7 +321,7 @@ export const resetPassword = async (req,res)=>{
                 message:'Invalid OTP'
             })
         }
-        if(user.resetOtpExpireat<Date.now){
+        if(user.resetOtpExpireAt<Date.now){
             return res.json({
                 success:false,
                 message:'OTP Expired'
@@ -304,7 +332,7 @@ export const resetPassword = async (req,res)=>{
 
         user.password = hashedPassword;
         user.resetOtp = '';
-        user.resetOtpExpireat = 0;
+        user.resetOtpExpireAt = 0;
 
         await user.save();
 

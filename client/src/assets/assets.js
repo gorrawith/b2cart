@@ -76,6 +76,8 @@ import register_page from "./Register_icon.jpg"
 import person from "./person_icon.svg"
 import person00 from "./product_list_icon.svg"
 import register_icon00 from "./Register_icon00.png"
+import eyeclose from "./eye-close.png"
+import eyeopen from "./eye-open.png"
 
 export const assets = {
   logo,
@@ -111,7 +113,9 @@ export const assets = {
   register_page,
   person,
   person00,
-  register_icon00
+  register_icon00,
+  eyeclose,
+  eyeopen,
 
 };
 

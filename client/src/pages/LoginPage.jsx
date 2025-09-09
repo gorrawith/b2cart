@@ -6,12 +6,18 @@ import { NavLink } from "react-router-dom";
 
 const LoginPage = () => {
 
-    const {setShowUserLogin,setUser,axios,navigate,setCartItems,setIsSeller,user} = useAppContext()
+    const {setShowUserLogin,setUser,axios,navigate,setCartItems,user} = useAppContext()
     
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [show,setShow] = React.useState(false)
+    
+    const Showpassword = () =>{
+        setShow(!show)
+    }
+    
 
     const onSubmitHandler = async (event)=>{
         try{
@@ -81,9 +87,26 @@ const LoginPage = () => {
                             value={password} 
                             placeholder="Password" 
                             className="bg-transparent text-gray-500/80 placeholder-gray-500/80 outline-none text-sm w-full h-full" 
-                            type="password"
+                            type={show ? "text":"password"}
                             required 
                         />
+                        <p onClick={Showpassword}>
+                            {show ? 
+                            <img 
+                                src={assets.eyeclose} 
+                                width="19" 
+                                height="17" 
+                                className="m-6"
+                                />
+                                :<img 
+                                className="m-6"
+                                width="19" 
+                                height="17" 
+                                src="https://img.icons8.com/material-outlined/50/4D4D4D/visible.png" 
+                                alt="visible"
+                            />
+                            }
+                        </p>
                     </div>
                     <div className="w-full flex items-center justify-between mt-8 text-gray-500/80">
                         <div className="flex items-center gap-2">

@@ -7,6 +7,7 @@ const EmailVerify = () => {
 
     axios.defaults.withCredentials = true;
     const {navigate,fetchUser,user} = useAppContext()
+    
 
     const inputRefs = React.useRef([])
     const handleInput = (e,index)=>{

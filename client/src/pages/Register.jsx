@@ -3,6 +3,7 @@ import React from 'react'
 import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 
+
 const Register = () => {
 
     const {setShowUserLogin,setUser,axios,navigate,setCartItems} = useAppContext()
@@ -10,6 +11,11 @@ const Register = () => {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const [show,setShow] = React.useState(false)
+
+    const Showpassword = () =>{
+        setShow(!show)
+    }
 
     const onSubmitHandler = async (event)=>{
         try{
@@ -30,6 +36,8 @@ const Register = () => {
         }       
     }
 
+    
+
   return (
         <div className="flex h-[700px] w-full">
             <div className="w-full hidden md:inline-block">
@@ -46,11 +54,7 @@ const Register = () => {
                         <div className="w-full h-px bg-gray-300/90"></div>
                     </div>        
                     <div className="flex items-center w-full bg-transparent border border-gray-300/60 h-12 rounded-full overflow-hidden pl-6 gap-2">
-                        <img 
-                            className=""
-                            src={assets.person}
-                            alt=''
-                        />
+                        <img width="16" height="11" src="https://img.icons8.com/windows/32/4D4D4D/user.png" alt="user"/>
                         <input
                             onChange={(e) => setName(e.target.value)}  
                             value={name} 
@@ -58,7 +62,7 @@ const Register = () => {
                             placeholder="Name" 
                             className="bg-transparent text-gray-500/80 placeholder-gray-500/80 outline-none text-sm w-full h-full" 
                             required 
-                        />               
+                        />              
                     </div>
                     <div className="flex items-center mt-6 w-full bg-transparent border border-gray-300/60 h-12 rounded-full overflow-hidden pl-6 gap-2">
                         <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,11 +84,28 @@ const Register = () => {
                         <input 
                             onChange={(e) => setPassword(e.target.value)}
                             value={password} 
-                            type="password" 
+                            type={show ? "text":"password"}
                             placeholder="Password" 
                             className="bg-transparent text-gray-500/80 placeholder-gray-500/80 outline-none text-sm w-full h-full" 
                             required 
                         />
+                        <p onClick={Showpassword}>
+                            {show ? 
+                            <img 
+                                src={assets.eyeclose} 
+                                width="19" 
+                                height="17" 
+                                className="m-6"
+                                />
+                             :<img 
+                                className="m-6"
+                                width="19" 
+                                height="17" 
+                                src="https://img.icons8.com/material-outlined/50/4D4D4D/visible.png" 
+                                alt="visible"
+                            />
+                            }
+                        </p>
                     </div>      
                     <div className="w-full flex items-center justify-between mt-8 text-gray-500/80">
                         <div className="flex items-center gap-2">
