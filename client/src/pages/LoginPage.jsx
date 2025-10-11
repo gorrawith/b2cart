@@ -8,7 +8,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginPage = () => {
 
-    const {setShowUserLogin,setUser,axios,navigate,setCartItems,user} = useAppContext()
+    const {setShowUserLogin,setUser,axios,navigate,setCartItems,user,fetchUser,fetchSeller,fetchProducts} = useAppContext()
     
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
@@ -73,6 +73,16 @@ const LoginPage = () => {
             navigate('/');
         }
     }, [user, navigate]);
+
+    useEffect(() => {
+        if (user) {
+            fetchUser();
+            fetchSeller();
+            fetchProducts();
+        } else {
+            setUser(null);
+        }
+    }, [user]);
 
   return (
         <div className="flex h-[700px] w-full">
