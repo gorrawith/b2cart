@@ -41,43 +41,56 @@ const ResetPassword = () => {
     })
   }
 
-  const onSubmitEmail = async (e)=>{
-    e.preventDefault();
-    try{
-      const {data} = await axios.post('/api/user/send-reset-otp',
-        {email})
-      data.success ? toast.success(data.message) : toast.error(data.message)
-      data.success && setIsEmailSent(true)
+  const onSubmitEmail = async (e) => {
+      e.preventDefault();
+      try {
+        // เช็ก email ก่อนว่าเป็นของ Google หรือไม่
+        const checkRes = await axios.post("/api/user/check-email-auth-type", { email });
+        
+        if (!checkRes.data.success && checkRes.data.authType === "google") {
+          toast.error("บัญชีนี้เข้าสู่ระบบด้วย Google ไม่สามารถรีเซ็ตรหัสผ่านได้");
+          return;
+        }
 
-    }catch(error){
-      toast.error(error.message)
-    }
-  }
+        if (!checkRes.data.success) {
+          toast.error(checkRes.data.message);
+          return;
+        }
+
+        // ✅ ถ้าไม่ใช่ Google ค่อยส่ง OTP
+        const { data } = await axios.post("/api/user/send-reset-otp", { email });
+        data.success ? toast.success(data.message) : toast.error(data.message);
+        data.success && setIsEmailSent(true);
+
+      } catch (error) {
+        toast.error(error.message);
+      }
+  };
 
   const onSubmitOTP = async (e) => {
 
-  e.preventDefault();
-  const otpArray = inputRefs.current.map(e => e.value);
-  const enteredOtp = otpArray.join('');
-  setOtp(enteredOtp);
+    e.preventDefault();
+    const otpArray = inputRefs.current.map(e => e.value);
+    const enteredOtp = otpArray.join('');
+    setOtp(enteredOtp);
   
-  try {
-    const { data } = await axios.post('/api/user/verify-reset-otp', {
-      email,
-      otp: enteredOtp,
+    try {
+      const { data } = await axios.post('/api/user/verify-reset-otp', {
+        email,
+        otp: enteredOtp,
+        
+      });
       
-    });
-    
-    if (data.success) {
-      toast.success("OTP ถูกต้อง");
-      setIsOtpSubmited(true); // แสดงฟอร์มกรอกรหัสผ่านใหม่
-      
-    } else {
-      toast.error("OTP ไม่ถูกต้อง");
+      if (data.success) {
+        toast.success("OTP ถูกต้อง");
+        setIsOtpSubmited(true); // แสดงฟอร์มกรอกรหัสผ่านใหม่
+        
+      } else {
+        toast.error("OTP ไม่ถูกต้อง");
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
-  } catch (error) {
-    toast.error(error.message);
-  }
 }
 
   const onSubmitNewPassword = async (e) =>{
