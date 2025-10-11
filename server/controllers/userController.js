@@ -115,6 +115,7 @@ export const logout = async (req,res) =>{
             httpOnly:true,
             secure:process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            path: "/",
             
         });
         return res.json({
@@ -385,6 +386,7 @@ export const googleAuth = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "None" : "strict",
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
