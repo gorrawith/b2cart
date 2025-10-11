@@ -8,7 +8,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 const LoginPage = () => {
 
-    const {setShowUserLogin,setUser,axios,navigate,setCartItems,user,fetchUser,fetchSeller,fetchProducts} = useAppContext()
+    const {setShowUserLogin,setUser,axios,navigate,setCartItems,user} = useAppContext()
     
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
@@ -24,7 +24,7 @@ const LoginPage = () => {
         try {
             if (authResult.code) {
                 // ส่ง code ไป backend เพื่อแลก token และข้อมูลผู้ใช้
-                const {data} = await axios.get(`/api/user/googlelogin?code=${authResult.code}`);
+                const {data} = await axios.get(`/api/user/googlelogin?code=${authResult.code}`,{ withCredentials: true });
                 console.log("Google login response:", data);
 
             if (data.success) {
@@ -74,15 +74,7 @@ const LoginPage = () => {
         }
     }, [user, navigate]);
 
-    useEffect(() => {
-        if (user) {
-            fetchUser();
-            fetchSeller();
-            fetchProducts();
-        } else {
-            setUser(null);
-        }
-    }, [user]);
+    
 
   return (
         <div className="flex h-[700px] w-full">
