@@ -11,7 +11,7 @@ const Navbar = () => {
     const logout = async ()=>{
         try{
             const {data} = await axios.get('/api/user/logout')
-            localStorage.removeItem("token");
+            //localStorage.removeItem("token");
             if(data.success){
                 toast.success(data.message)
                 setUser(null);
