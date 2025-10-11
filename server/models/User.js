@@ -10,6 +10,10 @@ const userSchema = new mongoose.Schema({
     isAccountVerified: {type:Boolean,default:false},
     resetOtp: {type:String,default:''},
     resetOtpExpireAt: {type:Number,default:0},
+
+    googleId: { type: String, default: null },
+    authType: { type: String, enum: ['local', 'google'], default: 'local' },
+    
 },{minimize : false})
 
 const User = mongoose.models.user || mongoose.model('user',userSchema)
