@@ -9,15 +9,11 @@ const userSchema = new mongoose.Schema({
     verifyOtpExpireAt: {type:Number,default:0},
     isAccountVerified: {type:Boolean,default:false},
     resetOtp: {type:String,default:''},
-<<<<<<< HEAD
     resetOtpExpireAt: {type:Number,default:0},
 
     // googleId: { type: String, default: null },
     // authType: { type: String, enum: ['local', 'google'], default: 'local' },
     
-=======
-    resetOtpExpireAt: {type:Number,default:0}
->>>>>>> parent of 5c12888 (password usertable false)
 },{minimize : false})
 
 const User = mongoose.models.user || mongoose.model('user',userSchema)
