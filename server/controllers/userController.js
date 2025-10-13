@@ -2,8 +2,8 @@ import User from "../models/User.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import transporter from '../configs/nodemailer.js'
-import oauth2Client from '../configs/googleConfig.js'
-import axios from 'axios';
+// import oauth2Client from '../configs/googleConfig.js'
+// import axios from 'axios';
 
 //Register User : /api/user/register
 export const register = async (req,res)=>{
@@ -346,89 +346,89 @@ export const resetPassword = async (req,res)=>{
 
 
 // googlelogin /api/user/googlelogin
-export const googleAuth = async (req, res) => {
-  const code = req.query.code;
-  try {
-    // ✅ ดึง token จาก Google
-    const googleRes = await oauth2Client.getToken(code);
-    oauth2Client.setCredentials(googleRes.tokens);
+// export const googleAuth = async (req, res) => {
+//   const code = req.query.code;
+//   try {
+//     // ✅ ดึง token จาก Google
+//     const googleRes = await oauth2Client.getToken(code);
+//     oauth2Client.setCredentials(googleRes.tokens);
 
-    // ✅ ดึงข้อมูลผู้ใช้จาก Google
-    const userRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
-      headers: {
-        Authorization: `Bearer ${googleRes.tokens.access_token}`,
-      },
-    });
+//     // ✅ ดึงข้อมูลผู้ใช้จาก Google
+//     const userRes = await axios.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+//       headers: {
+//         Authorization: `Bearer ${googleRes.tokens.access_token}`,
+//       },
+//     });
 
-    const { email, name, picture } = userRes.data;
+//     const { email, name, picture } = userRes.data;
 
-    // ✅ ค้นหาผู้ใช้ใน DB
-    let user = await User.findOne({ email });
+//     // ✅ ค้นหาผู้ใช้ใน DB
+//     let user = await User.findOne({ email });
 
-    if (!user) {
-      // ถ้าไม่เคยมี user มาก่อน → สร้างใหม่
-      user = await User.create({
-        name,
-        email,
-        image: picture,
-        authType: "google", // ระบุว่า login ด้วย Google
-      });
-    } else if (!user.authType) {
-      // ถ้ามี user อยู่แล้วแต่ยังไม่มี field authType → อัปเดต
-      user.authType = "google";
-      await user.save();
-    }
-    // ✅ สร้าง JWT token
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+//     if (!user) {
+//       // ถ้าไม่เคยมี user มาก่อน → สร้างใหม่
+//       user = await User.create({
+//         name,
+//         email,
+//         image: picture,
+//         authType: "google", // ระบุว่า login ด้วย Google
+//       });
+//     } else if (!user.authType) {
+//       // ถ้ามี user อยู่แล้วแต่ยังไม่มี field authType → อัปเดต
+//       user.authType = "google";
+//       await user.save();
+//     }
+//     // ✅ สร้าง JWT token
+//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
-    // ✅ ส่ง token กลับไปใน cookie
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-      path: "/",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+//     // ✅ ส่ง token กลับไปใน cookie
+//     res.cookie("token", token, {
+//       httpOnly: true,
+//       secure: process.env.NODE_ENV === "production",
+//       sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+//       path: "/",
+//       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+//     });
 
-    // ✅ ส่งข้อมูลกลับไปให้ frontend
-    res.status(200).json({
-      success: true,
-      message: "Login with Google successful!",
-      token,
-      user,
-    });
+//     // ✅ ส่งข้อมูลกลับไปให้ frontend
+//     res.status(200).json({
+//       success: true,
+//       message: "Login with Google successful!",
+//       token,
+//       user,
+//     });
 
-  } catch (error) {
-    res.status(401).json({
-      success: false,
-      message: "Not authorized",
-      error: error.response?.data || error.message,
-    });
-  }
-};
+//   } catch (error) {
+//     res.status(401).json({
+//       success: false,
+//       message: "Not authorized",
+//       error: error.response?.data || error.message,
+//     });
+//   }
+// };
 
-//  /api/user/check-email-auth-type
-export const checkEmailAuthType = async (req, res) => {
+// //  /api/user/check-email-auth-type
+// export const checkEmailAuthType = async (req, res) => {
 
-  const { email } = req.body;
-  if (!email) {
-    return res.json({ success: false, message: "Email is required" });
-  }
+//   const { email } = req.body;
+//   if (!email) {
+//     return res.json({ success: false, message: "Email is required" });
+//   }
 
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.json({ success: false, message: "User not found" });
-    }
-    if (user.authType === "google") {
-      return res.json({
-        success: false,
-        message: "บัญชีนี้เข้าสู่ระบบด้วย Google ไม่สามารถรีเซ็ตรหัสผ่านได้",
-        authType: "google",
-      });
-    }
-    return res.json({ success: true, message: "Email is valid", authType: user.authType });
-  } catch (error) {
-    return res.json({ success: false, message: error.message });
-  }
-};
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.json({ success: false, message: "User not found" });
+//     }
+//     if (user.authType === "google") {
+//       return res.json({
+//         success: false,
+//         message: "บัญชีนี้เข้าสู่ระบบด้วย Google ไม่สามารถรีเซ็ตรหัสผ่านได้",
+//         authType: "google",
+//       });
+//     }
+//     return res.json({ success: true, message: "Email is valid", authType: user.authType });
+//   } catch (error) {
+//     return res.json({ success: false, message: error.message });
+//   }
+// };
