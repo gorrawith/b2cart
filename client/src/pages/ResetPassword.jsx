@@ -44,18 +44,7 @@ const ResetPassword = () => {
   const onSubmitEmail = async (e) => {
       e.preventDefault();
       try {
-        // เช็ก email ก่อนว่าเป็นของ Google หรือไม่
-        const checkRes = await axios.post("/api/user/check-email-auth-type", { email });
         
-        if (!checkRes.data.success && checkRes.data.authType === "google") {
-          toast.error("บัญชีนี้เข้าสู่ระบบด้วย Google ไม่สามารถรีเซ็ตรหัสผ่านได้");
-          return;
-        }
-
-        if (!checkRes.data.success) {
-          toast.error(checkRes.data.message);
-          return;
-        }
 
         // ✅ ถ้าไม่ใช่ Google ค่อยส่ง OTP
         const { data } = await axios.post("/api/user/send-reset-otp", { email });
