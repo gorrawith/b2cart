@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { assets } from '../assets/assets'
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
-import {googleLogout} from "@react-oauth/google"
+
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false);
@@ -14,7 +14,7 @@ const Navbar = () => {
             const {data} = await axios.get('/api/user/logout')
             if(data.success){
                 toast.success(data.message)
-                googleLogout(); 
+                 
                 setUser(null);
                 setCartItems({})
                 navigate('/')
