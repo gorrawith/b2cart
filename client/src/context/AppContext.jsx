@@ -35,6 +35,22 @@ export const AppContextProvider = ({children})=>{
         }
     }
 
+    // //Fetch User Auth Status , User Data and Cart Item
+    // const fetchUser = async () =>{
+    //     try{
+    //         const {data} = await axios.get('api/user/is-auth');
+    //         if(data.success){
+    //             setUser(data.user)
+    //             setCartItems(data.user.cartItems)
+    //         }else{
+    //             setUser(null);
+    //             setCartItems({});
+    //         }
+    //     }catch (error){
+    //         setUser(null)
+    //     }
+    // }
+
     //Fetch User Auth Status , User Data and Cart Item
     const fetchUser = async () =>{
         try{
@@ -42,10 +58,8 @@ export const AppContextProvider = ({children})=>{
             if(data.success){
                 setUser(data.user)
                 setCartItems(data.user.cartItems)
-            }else{
-                setUser(null);
-                setCartItems({});
             }
+
         }catch (error){
             setUser(null)
         }
