@@ -20,35 +20,35 @@ const LoginPage = () => {
         setShow(!show)
     }
 
-    const responseGoogle = async (authResult) => {
-        try {
-            if (authResult.code) {
-                // ส่ง code ไป backend เพื่อแลก token และข้อมูลผู้ใช้
-                const {data} = await axios.get(`/api/user/googlelogin?code=${authResult.code}`,{ withCredentials: true });
-                console.log("Google login response:", data);
+    // const responseGoogle = async (authResult) => {
+    //     try {
+    //         if (authResult.code) {
+    //             // ส่ง code ไป backend เพื่อแลก token และข้อมูลผู้ใช้
+    //             const {data} = await axios.get(`/api/user/googlelogin?code=${authResult.code}`,);
+    //             console.log("Google login response:", data);
 
-            if (data.success) {
-                toast.success("Login with Google successful!");
-                navigate('/')
-                setUser(data.user)
-                setShowUserLogin(false)  
-            }else{
-                toast.error(data.message || "Google login failed");
-            }
-            }else{
-                toast.error("Google login failed — missing auth code.");
-            }
-        }catch (error) {
-            toast.error(error.message)
-        }
-    };
+    //         if (data.success) {
+    //             toast.success("Login with Google successful!");
+    //             navigate('/')
+    //             setUser(data.user)
+    //             setShowUserLogin(false)  
+    //         }else{
+    //             toast.error(data.message || "Google login failed");
+    //         }
+    //         }else{
+    //             toast.error("Google login failed — missing auth code.");
+    //         }
+    //     }catch (error) {
+    //         toast.error(error.message)
+    //     }
+    // };
 
-    const googleLogin = useGoogleLogin({
-        onSuccess: responseGoogle,
-        onError: responseGoogle,
-        flow: 'auth-code',
-        redirect_uri: window.location.origin,
-    })
+    // const googleLogin = useGoogleLogin({
+    //     onSuccess: responseGoogle,
+    //     onError: responseGoogle,
+    //     flow: 'auth-code',
+    //     redirect_uri: window.location.origin,
+    // })
 
     const onSubmitHandler = async (event)=>{
         try{
@@ -155,7 +155,7 @@ const LoginPage = () => {
                         className="mt-8 w-full h-11 rounded-full text-white bg-primary hover:opacity-90 transition-opacity cursor-pointer">
                         Login
                     </button>
-                    <div 
+                    {/* <div 
                         className="w-full mt-5 bg-gray-500/20 flex items-center justify-center h-12 rounded-full cursor-pointer"
                         onClick={googleLogin}
                         >
@@ -166,7 +166,7 @@ const LoginPage = () => {
                             className=""
                         />
                             Google Login
-                    </div>
+                    </div> */}
                     
                     <p className="text-gray-500/90 text-sm mt-4">Don’t have an account?
                         <a 
