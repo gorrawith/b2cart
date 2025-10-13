@@ -36,8 +36,6 @@ const Register = () => {
         }       
     }
 
-    
-
   return (
         <div className="flex h-[700px] w-full">
             <div className="w-full hidden md:inline-block">
@@ -96,7 +94,7 @@ const Register = () => {
                                 width="19" 
                                 height="17" 
                                 className="m-6"
-                                />
+                            />
                              :<img 
                                 className="m-6"
                                 width="19" 

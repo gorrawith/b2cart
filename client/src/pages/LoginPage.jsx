@@ -3,6 +3,8 @@ import { useAppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
 import { assets } from "../assets/assets";
 import { NavLink } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+
 
 const LoginPage = () => {
 
@@ -17,7 +19,36 @@ const LoginPage = () => {
     const Showpassword = () =>{
         setShow(!show)
     }
-    
+
+    // const responseGoogle = async (authResult) => {
+    //     try {
+    //         if (authResult.code) {
+    //             // ส่ง code ไป backend เพื่อแลก token และข้อมูลผู้ใช้
+    //             const {data} = await axios.get(`/api/user/googlelogin?code=${authResult.code}`,);
+    //             console.log("Google login response:", data);
+
+    //         if (data.success) {
+    //             toast.success("Login with Google successful!");
+    //             navigate('/')
+    //             setUser(data.user)
+    //             setShowUserLogin(false)  
+    //         }else{
+    //             toast.error(data.message || "Google login failed");
+    //         }
+    //         }else{
+    //             toast.error("Google login failed — missing auth code.");
+    //         }
+    //     }catch (error) {
+    //         toast.error(error.message)
+    //     }
+    // };
+
+    // const googleLogin = useGoogleLogin({
+    //     onSuccess: responseGoogle,
+    //     onError: responseGoogle,
+    //     flow: 'auth-code',
+    //     redirect_uri: window.location.origin,
+    // })
 
     const onSubmitHandler = async (event)=>{
         try{
@@ -31,18 +62,19 @@ const LoginPage = () => {
                 setCartItems({})
                 setShowUserLogin(false)
             }else{
-                toast.error(data.message) 
+                toast.error("Email And Password ไม่ถูกต้อง") 
             }
         }catch (error){
             toast.error(error.message)
         }       
     }
-
     useEffect(() => {
         if (user) {
             navigate('/');
         }
     }, [user, navigate]);
+
+    
 
   return (
         <div className="flex h-[700px] w-full">
@@ -123,11 +155,25 @@ const LoginPage = () => {
                         className="mt-8 w-full h-11 rounded-full text-white bg-primary hover:opacity-90 transition-opacity cursor-pointer">
                         Login
                     </button>
+                    {/* <div 
+                        className="w-full mt-5 bg-gray-500/20 flex items-center justify-center h-12 rounded-full cursor-pointer"
+                        onClick={googleLogin}
+                        >
+                        <img 
+                            src={assets.googleicon} 
+                            width="60" 
+                            height="17" 
+                            className=""
+                        />
+                            Google Login
+                    </div> */}
+                    
                     <p className="text-gray-500/90 text-sm mt-4">Don’t have an account?
                         <a 
                             className="text-primary hover:underline cursor-pointer" 
                             onClick={()=> navigate("/register")}
-                            >Sign up</a>
+                            >Sign up
+                        </a>
                     </p>
                 </form>
             </div>

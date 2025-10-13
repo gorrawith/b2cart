@@ -78,6 +78,7 @@ import person00 from "./product_list_icon.svg"
 import register_icon00 from "./Register_icon00.png"
 import eyeclose from "./eye-close.png"
 import eyeopen from "./eye-open.png"
+import googleicon from "./google-icon.png"
 
 export const assets = {
   logo,
@@ -116,7 +117,7 @@ export const assets = {
   register_icon00,
   eyeclose,
   eyeopen,
-
+  googleicon
 };
 
 export const categories = [
@@ -171,8 +172,7 @@ export const footerLinks = [
       { text: "Home", url: "#" },
       { text: "Best Sellers", url: "#" },
       { text: "Offers & Deals", url: "#" },
-      //{ text: "Contact Us", url: "#" },
-      //{ text: "FAQs", url: "#" },
+      
     ],
   },
   {
@@ -191,7 +191,7 @@ export const footerLinks = [
       { text: "Instagram", url: "https://www.instagram.com/" },
       { text: "Twitter", url: "https://x.com/" },
       { text: "Facebook", url: "https://www.facebook.com/index.php/" },
-      //{ text: "YouTube", url: "#" },
+      
     ],
   },
 ];

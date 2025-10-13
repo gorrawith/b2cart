@@ -4,6 +4,7 @@ import { assets } from '../assets/assets'
 import { useAppContext } from "../context/AppContext";
 import toast from "react-hot-toast";
 
+
 const Navbar = () => {
     const [open, setOpen] = React.useState(false);
     const {user,setUser,navigate,searchQuery,getCartCount,axios,setCartItems} = useAppContext();
@@ -13,6 +14,7 @@ const Navbar = () => {
             const {data} = await axios.get('/api/user/logout')
             if(data.success){
                 toast.success(data.message)
+                 
                 setUser(null);
                 setCartItems({})
                 navigate('/')
@@ -25,26 +27,26 @@ const Navbar = () => {
     }
 
     const sendVerificationOtp = async ()=>{
-    try{
-      axios.defaults.withCredentials = true
+        try{
+        axios.defaults.withCredentials = true
+        const {data} = await axios.post('/api/user/send-verify-otp')
+        if(data.success){
+            navigate('/email-verify')
+            toast.success(data.message)
+        }else{
+            toast.error(data.message)
+        }
+        }catch(error){
+            toast.error(error.message)
+        }
+    }
 
-      const {data} = await axios.post('/api/user/send-verify-otp')
-      if(data.success){
-        navigate('/email-verify')
-        toast.success(data.message)
-      }else{
-        toast.error(data.message)
-      }
-    }catch(error){
-      toast.error(error.message)
-    }
-    }
-    
     useEffect(()=>{
         if(searchQuery.length >0){
             navigate("/products")
         }
     },[searchQuery])
+
 
     return (
         <div className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
@@ -83,23 +85,26 @@ const Navbar = () => {
                                     <li 
                                         onClick={sendVerificationOtp}
                                         className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>
-                                        Verify email
+                                        Verify Email
                                     </li>
                                 }
-                                <li 
-                                    onClick={()=>{navigate('/reset-password')
+                                {user?.authType === 'local' && (
+                                    <li
+                                        onClick={()=>{
+                                        navigate('/reset-password');
                                         setOpen(false);
-                                    }}
-                                    className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                    Change Password
-                                </li>
+                                        }}
+                                        className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
+                                        Change Password
+                                    </li>
+                                )}
                                 <li 
                                     onClick={()=>{ 
                                         navigate("my-orders");
                                         setOpen(false);
                                     }}
                                     className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                    My orders
+                                    My Orders
                                 </li>
                                 <li
                                     onClick={() => {
@@ -107,7 +112,7 @@ const Navbar = () => {
                                         setOpen(false);
                                     }}
                                     className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                    Logout
+                                    LogOut
                                 </li>
                             </ul>
                         )}
