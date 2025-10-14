@@ -25,17 +25,10 @@ import Register from "./pages/Register";
 import EmailVerify from "./pages/EmailVerify";
 import ResetPassword from "./pages/ResetPassword";
 import { Navigate } from "react-router-dom";
-// import { GoogleOAuthProvider} from "@react-oauth/google"
-
 
 
 const App =() => {
 
-  // const GoogleWrapper = ()=>(
-	// 	<GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
-	// 		<LoginPage></LoginPage>
-	// 	</GoogleOAuthProvider>
-	// )
   const isSellerPath =  useLocation().pathname.includes("seller");
   const {showUserLogin,isSeller,user}=useAppContext()
 
@@ -57,7 +50,7 @@ const App =() => {
           <Route path='/my-orders' element={<MyOrders/>}/>
           <Route path='/loader' element={<Loading/>}/>
           <Route path='/contact' element={<Contact/>}/>
-          <Route path='/login' element={<LoginPage/>}/>       
+          <Route path='/login' element={<LoginPage/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/email-verify' element={<EmailVerify/>}/>
           <Route path='/reset-password' element={<ResetPassword/>}/>
@@ -76,4 +69,5 @@ const App =() => {
     </div>
   );
 }
+
 export default App;

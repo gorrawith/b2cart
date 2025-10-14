@@ -35,22 +35,6 @@ export const AppContextProvider = ({children})=>{
         }
     }
 
-    // //Fetch User Auth Status , User Data and Cart Item
-    // const fetchUser = async () =>{
-    //     try{
-    //         const {data} = await axios.get('api/user/is-auth');
-    //         if(data.success){
-    //             setUser(data.user)
-    //             setCartItems(data.user.cartItems)
-    //         }else{
-    //             setUser(null);
-    //             setCartItems({});
-    //         }
-    //     }catch (error){
-    //         setUser(null)
-    //     }
-    // }
-
     //Fetch User Auth Status , User Data and Cart Item
     const fetchUser = async () =>{
         try{
@@ -67,6 +51,7 @@ export const AppContextProvider = ({children})=>{
 
     //Fetch All Products
     const fetchProducts = async ()=>{
+        //setProducts(dummyProducts)
         try{
             const {data} = await axios.get('/api/product/list')
             if(data.success){
@@ -82,6 +67,7 @@ export const AppContextProvider = ({children})=>{
     //Add Product to Cart
     const addToCart = (itemId)=>{
         let cartData = structuredClone(cartItems);
+
         if(cartData[itemId]){
             cartData[itemId]+=1;
         }else{
@@ -118,6 +104,7 @@ export const AppContextProvider = ({children})=>{
         for(const item in cartItems){
             totalCount += cartItems[item];
         }
+        //console.log(totalCount)
         return totalCount;
     }
 
@@ -142,14 +129,15 @@ export const AppContextProvider = ({children})=>{
     // Update Database Cart Items
     useEffect(()=>{
         const updateCart = async ()=>{
-            //console.log(cartItems)
+            console.log(cartItems)
             try{
                 //console.log(cartItems)
                 const {data} = await axios.post('/api/cart/update',{
                     cartItems,
                     userId: user._id 
                 })
-                if (!data.success){               
+                if (!data.success){
+                    
                     toast.error(data.message)
                 }
             }catch (error) {
@@ -165,7 +153,7 @@ export const AppContextProvider = ({children})=>{
         showUserLogin,setShowUserLogin,products,currency,addToCart,
         updateCartItem,removeFromCart,cartItems,searchQuery,setSearchQuery,
         getCartAmount,getCartCount,axios,fetchProducts,setCartItems,location,
-        fetchUser,fetchSeller
+        fetchUser
     }
 
     return <AppContext.Provider value={value}>
