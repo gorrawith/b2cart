@@ -9,8 +9,7 @@ const userSchema = new mongoose.Schema({
     verifyOtpExpireAt: {type:Number,default:0},
     isAccountVerified: {type:Boolean,default:false},
     resetOtp: {type:String,default:''},
-    resetOtpExpireAt: {type:Number,default:0},
-
+    resetOtpExpireAt: {type:Number,default:0}
 },{minimize : false})
 
 const User = mongoose.models.user || mongoose.model('user',userSchema)

@@ -7,7 +7,6 @@ const authUser = async (req,res, next)=>{
     }
     try{
         const tokenDecode = jwt.verify(token,process.env.JWT_SECRET)
-        //req.userId = tokenDecode.id ;
         if(tokenDecode.id){    
             req.userId = tokenDecode.id; 
         }else{
@@ -19,5 +18,3 @@ const authUser = async (req,res, next)=>{
     }
 }
 export default authUser;
-
-
